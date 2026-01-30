@@ -6,8 +6,8 @@ import { sendMail } from "../../common/utils/mailer";
 import { emailVerificationTemplate } from "../../templates/emailVerification";
 import { HttpError } from "../../common/utils/httpError";
 import { UserRepository } from "../user/user.repository";
-import { TokenService } from "../Token/token.service";
-import { AuthToken } from "../Token/authtoken.model";
+import { TokenService } from "../token/token.service";
+import { AuthToken } from "../token/authtoken.model";
 
 export const AuthService = {
   async signup(data: { name: string; email: string; password: string }) {
