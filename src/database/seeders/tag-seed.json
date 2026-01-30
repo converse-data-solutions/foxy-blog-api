@@ -1,0 +1,40 @@
+[
+  { "name": "Solo Travel", "slug": "solo-travel" },
+  { "name": "Budget Travel", "slug": "budget-travel" },
+  { "name": "Luxury Travel", "slug": "luxury-travel" },
+  { "name": "Backpacking", "slug": "backpacking" },
+
+  { "name": "Healthy Living", "slug": "healthy-living" },
+  { "name": "Morning Routine", "slug": "morning-routine" },
+  { "name": "Mental Health", "slug": "mental-health" },
+  { "name": "Self Care", "slug": "self-care" },
+
+  { "name": "Home Cooking", "slug": "home-cooking" },
+  { "name": "Street Food", "slug": "street-food" },
+  { "name": "Food Review", "slug": "food-review" },
+  { "name": "Vegan", "slug": "vegan" },
+
+  { "name": "Workout", "slug": "workout" },
+  { "name": "Yoga", "slug": "yoga" },
+  { "name": "Weight Loss", "slug": "weight-loss" },
+
+  { "name": "Men Fashion", "slug": "men-fashion" },
+  { "name": "Women Fashion", "slug": "women-fashion" },
+  { "name": "Outfit Ideas", "slug": "outfit-ideas" },
+
+  { "name": "Startup Life", "slug": "startup-life" },
+  { "name": "Freelancing", "slug": "freelancing" },
+  { "name": "Remote Work", "slug": "remote-work" },
+
+  { "name": "Student Life", "slug": "student-life" },
+  { "name": "Career Guidance", "slug": "career-guidance" },
+
+  { "name": "Movie Review", "slug": "movie-review" },
+  { "name": "Music", "slug": "music" },
+
+  { "name": "Motivation", "slug": "motivation" },
+  { "name": "Productivity", "slug": "productivity" },
+
+  { "name": "Mobile Photography", "slug": "mobile-photography" },
+  { "name": "Travel Photography", "slug": "travel-photography" }
+]

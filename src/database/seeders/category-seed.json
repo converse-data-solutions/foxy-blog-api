@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Travel",
+    "slug": "travel",
+    "description": "Destinations, experiences, and travel guides"
+  },
+  {
+    "name": "Lifestyle",
+    "slug": "lifestyle",
+    "description": "Daily life, habits, and modern living"
+  },
+  {
+    "name": "Food & Recipes",
+    "slug": "food-recipes",
+    "description": "Cooking, recipes, and food culture"
+  },
+  {
+    "name": "Health & Wellness",
+    "slug": "health-wellness",
+    "description": "Physical, mental, and emotional well-being"
+  },
+  {
+    "name": "Fitness",
+    "slug": "fitness",
+    "description": "Workouts, exercise routines, and fitness tips"
+  },
+  {
+    "name": "Fashion & Style",
+    "slug": "fashion-style",
+    "description": "Clothing, trends, and personal style"
+  },
+  {
+    "name": "Beauty & Grooming",
+    "slug": "beauty-grooming",
+    "description": "Skincare, haircare, and grooming advice"
+  },
+  {
+    "name": "Business & Finance",
+    "slug": "business-finance",
+    "description": "Money, startups, and financial growth"
+  },
+  {
+    "name": "Career",
+    "slug": "career",
+    "description": "Jobs, career advice, and professional growth"
+  },
+  {
+    "name": "Education",
+    "slug": "education",
+    "description": "Learning, exams, and student life"
+  },
+  {
+    "name": "Entertainment",
+    "slug": "entertainment",
+    "description": "Movies, music, and pop culture"
+  },
+  {
+    "name": "Relationships",
+    "slug": "relationships",
+    "description": "Love, friendships, and family life"
+  },
+  {
+    "name": "Parenting",
+    "slug": "parenting",
+    "description": "Parenthood tips and child development"
+  },
+  {
+    "name": "Personal Growth",
+    "slug": "personal-growth",
+    "description": "Self-improvement and mindset"
+  },
+  {
+    "name": "Spirituality",
+    "slug": "spirituality",
+    "description": "Mindfulness, faith, and inner peace"
+  },
+  {
+    "name": "Photography",
+    "slug": "photography",
+    "description": "Photography tips and visual storytelling"
+  },
+  {
+    "name": "Home & Living",
+    "slug": "home-living",
+    "description": "Home decor, organization, and living spaces"
+  },
+  {
+    "name": "Environment",
+    "slug": "environment",
+    "description": "Sustainability and eco-friendly living"
+  }
+]
