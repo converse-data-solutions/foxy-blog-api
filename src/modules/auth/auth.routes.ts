@@ -1,8 +1,9 @@
 import { Router } from "express";
 import { AuthController } from "./auth.controller";
 import passport from "../../config/passport";
-import { loginSchema, signupSchema } from "./auth.schema";
+import { loginSchema, signupSchema } from "./auth.dto";
 import { validate } from "../../common/middlewares/validate";
+import { requireAuth } from "../../common/middlewares/auth.middleware";
 
 const router = Router();
 
@@ -128,4 +129,18 @@ router.get(
   },
 );
 
+
+/**
+ * @swagger
+ * /api/auth/logout:
+ *   post:
+ *     summary: Logout user
+ *     tags: [Auth]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Logged out successfully
+ */
+router.post("/logout", requireAuth, AuthController.logout);
 export default router;

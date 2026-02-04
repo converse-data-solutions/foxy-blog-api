@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { PostViewController } from "./post-view.controller";
+import { optionalAuth } from "../../common/middlewares/optional-auth.middleware";
 
 const router = Router();
 
@@ -37,6 +38,7 @@ const router = Router();
  */
 router.post(
   "/posts/:postId/view",
+  optionalAuth,
   PostViewController.viewPost
 );
 

@@ -1,38 +1,35 @@
 import { hash, compare } from "../../common/utils/hash";
 import { signToken } from "../../common/utils/jwt";
-import { User } from "../user/user.model";
 import { generateVerificationToken } from "../../common/utils/token";
 import { sendMail } from "../../common/utils/mailer";
 import { emailVerificationTemplate } from "../../templates/emailVerification";
 import { HttpError } from "../../common/utils/httpError";
-import { UserRepository } from "../user/user.repository";
-import { TokenService } from "../token/token.service";
-import { AuthToken } from "../token/authtoken.model";
+import { CreateUserDTO } from "./create-user.dto";
+import { LoginDTO } from "./login-user.dto";
+import { UserRepository } from "../users/user.repository";
+import { AuthToken } from "../tokens/authtoken.model";
+import { TokenService } from "../tokens/token.service";
 
-export const AuthService = {
-  async signup(data: { name: string; email: string; password: string }) {
+export class AuthService {
+  static async signup(data:CreateUserDTO) {
     const { name, email, password } = data;
 
-    // 1️⃣ Check if email already exists
     const existingUser = await UserRepository.findByEmail(email);
 
     if (existingUser) {
       throw new HttpError("Email already in use", 400);
     }
 
-    // 2️⃣ Hash password
     const passwordHash = await hash(password);
 
-    // 3️⃣ Create new user
-    const user = await User.create({
+    const user = await UserRepository.create({
       name,
       email,
-      passwordHash,
+      password: passwordHash,
       authProvider: "local",
       isVerified: false,
     });
 
-    // 4️⃣ Generate verification token
     const { rawToken, tokenHash } = generateVerificationToken();
 
     await AuthToken.create({
@@ -42,7 +39,6 @@ export const AuthService = {
       expiresAt: new Date(Date.now() + 15 * 60 * 1000),
     });
 
-    // 5️⃣ Send verification email
     const verifyUrl = `${process.env.FRONTEND_URL}/verify-email?token=${rawToken}`;
 
     await sendMail(
@@ -54,9 +50,10 @@ export const AuthService = {
     return {
       message: "Signup successful. Please verify your email.",
     };
-  },
+  }
 
-  async login(email: string, password: string) {
+  static async login(data:LoginDTO) {
+    const { email, password } = data;
     const user = await UserRepository.findByEmail(email);
 
     if (!user || !user.passwordHash) {
@@ -79,12 +76,13 @@ export const AuthService = {
 
     return {
       accessToken,
+      role:user.role
     };
-  },
+  }
 
-  async verifyEmail(token: string) {
+  static async verifyEmail(token: string) {
     const userId = await TokenService.verifyToken(token);
     await UserRepository.verifyUser(userId.toString());
     return;
-  },
+  }
 };

@@ -13,10 +13,7 @@ export const AuthController = {
   },
 
   async login(req: Request, res: Response) {
-    const result = await AuthService.login(
-      req.body.email,
-      req.body.password
-    );
+    const result = await AuthService.login(req.body);
 
     return res.status(200).json({
       statusCode: 200,
@@ -32,6 +29,19 @@ export const AuthController = {
       statusCode: 200,
       message: "Email verified successfully",
       data: null,
+    });
+  },
+
+  async logout(req: Request, res: Response) {
+    res.clearCookie("accessToken", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+
+    return res.status(200).json({
+      statusCode: 200,
+      message: "Logged out successfully",
     });
   },
 };

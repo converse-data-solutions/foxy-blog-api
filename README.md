@@ -61,26 +61,43 @@ This project is designed for **real-world SaaS / portfolio use**, not just demos
 
 Make sure the following are installed on your system:
 
-- **Node.js** (v18+ recommended)
+- **Node.js** (managed via **NVM**)
 - **npm**
-- **MongoDB** (local or Atlas)
+- **MongoDB** (Local instance or MongoDB Atlas)
 
-Check versions:
 
+### Check Installed Versions
 node -v
 npm -v
 
-## ▶️ Run Commands
+### 2️⃣ Set Up Node.js Version (Using NVM)
+nvm install 24.13.0
 
-### Install Dependencies
+nvm use $(Get-Content .nvmrc)
+
+node -v
+
+## 3️⃣ Install Dependencies
+node -v
+
+v24.13.0
+
 npm install
 
-npm run dev -- watch mode(nodemon)
-
+## 4️⃣ Run the Application
+### Development Mode
+npm run dev
+### Build the Project
 npm run build
-
+### Production Mode
 npm start
 
-### Run seed data (Category and Tag)
+
+## 5️⃣ Run Seed Data (Categories & Tags)
 npm run seed
+
+## 6️⃣ If Node.js Version Changes (Important)
+rm -rf node_modules
+
+npm install
 

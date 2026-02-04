@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { seedCategories, seedTags } from "./seedCategoriesAndTags";
+import { seedAdmin, seedCategories, seedTags } from "./seedCoreData";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -10,6 +10,7 @@ async function run() {
     await mongoose.connect(MONGO_URI!);
     console.log("📦 MongoDB connected");
 
+    await seedAdmin();
     await seedCategories();
     await seedTags();
 

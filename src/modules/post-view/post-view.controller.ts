@@ -6,21 +6,18 @@ import { AuthRequest } from "../../types/auth-request";
 export const PostViewController = {
   async viewPost(req: Request, res: Response) {
      const authReq = req as AuthRequest;
-    if (!authReq.user) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
+  
     const postId = req.params.postId;
 
     const userId = authReq.user?._id;
 
-    // Guest tracking via sessionId (cookie or header)
     let sessionId = req.cookies?.sessionId || req.headers["x-session-id"];
 
     if (!userId && !sessionId) {
       sessionId = uuidv4();
       res.cookie("sessionId", sessionId, {
         httpOnly: true,
-        maxAge: 1000 * 60 * 60 * 24, // 1 day
+        maxAge: 1000 * 60 * 60 * 24, 
       });
     }
 

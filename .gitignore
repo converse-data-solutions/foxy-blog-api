@@ -6,7 +6,7 @@ dist/
 
 # Environment variables
 .env
-.env.*
+
 
 # Logs
 logs/
@@ -25,10 +25,11 @@ Thumbs.db
 
 # Coverage
 coverage/
-
 # Temporary files
 tmp/
 temp/
 
+#image files
+public/
 # TypeScript cache
 *.tsbuildinfo
