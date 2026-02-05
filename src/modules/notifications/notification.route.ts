@@ -46,7 +46,7 @@ const router = Router();
  *         description: Unauthorized
  */
 router.get(
-  "/notifications/me",
+  "/me",
   requireAuth,
   NotificationController.getMyNotifications
 );
@@ -74,7 +74,7 @@ router.get(
  *         description: Unauthorized
  */
 router.get(
-  "/notifications/unread-count",
+  "/unread-count",
   requireAuth,
   NotificationController.getUnreadCount
 );
@@ -101,7 +101,7 @@ router.get(
  *         description: Unauthorized
  */
 router.put(
-  "/notifications/:id/read",
+  "/:id/read",
   requireAuth,
   NotificationController.markAsRead
 );
@@ -121,7 +121,7 @@ router.put(
  *         description: Unauthorized
  */
 router.put(
-  "/notifications/read-all",
+  "/read-all",
   requireAuth,
   NotificationController.markAllAsRead
 );
