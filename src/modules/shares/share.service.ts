@@ -1,7 +1,6 @@
 import { Types } from "mongoose";
 import { ShareRepository } from "./share.repository";
-import { PostRepository } from "../posts/post.repository";
-
+import { PostRepository } from "../posts/user/post.repository";
 const ALLOWED_PLATFORMS = ["facebook", "twitter", "linkedin", "whatsapp"];
 
 export const ShareService = {

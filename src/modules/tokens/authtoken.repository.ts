@@ -1,7 +1,12 @@
 import { AuthToken } from "./authtoken.model";
 
 export class AuthTokenRepository {
-  static async create(data: any) {
+  static async create(data: {
+    userId: string;
+    tokenHash: string;
+    purpose: "verification" | "passwordReset";
+    expiresAt: Date;
+  }) {
     return await AuthToken.create(data);
   }
 

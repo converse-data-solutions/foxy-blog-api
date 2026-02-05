@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { ShareService } from "./share.service";
 import { AuthRequest } from "../../types/auth-request";
-import { PostService } from "../posts/post.service";
+import { PostService } from "../posts/user/post.service";
 import { HttpError } from "../../common/utils/httpError";
 
 export const ShareController = {
@@ -38,7 +38,7 @@ export const ShareController = {
     });
   },
   async getPostShareStats(req: Request, res: Response) {
-    const { postId } = req.params as any;
+    const { postId } = req.params as { postId: string };
 
     const stats = await ShareService.getShareStats(postId);
 

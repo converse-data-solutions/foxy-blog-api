@@ -143,4 +143,68 @@ router.get(
  *         description: Logged out successfully
  */
 router.post("/logout", requireAuth, AuthController.logout);
+
+
+/**
+ * @swagger
+ * /api/auth/forgot-password:
+ *   post:
+ *     summary: Send forgot password reset link
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - email
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 example: user@example.com
+ *     responses:
+ *       200:
+ *         description: Reset password link sent if email exists
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: If the email exists, a reset link has been sent
+ */
+router.post("/forgot-password", AuthController.forgotPassword);
+
+/**
+ * @swagger
+ * /api/auth/reset-password:
+ *   post:
+ *     summary: Reset password using token
+ *     tags: [Auth]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - token
+ *               - newPassword
+ *             properties:
+ *               token:
+ *                 type: string
+ *                 example: 9f2d4c3b7a1e4c8f9b2e6a1d5f7c9e2a
+ *               newPassword:
+ *                 type: string
+ *                 example: NewStrongPassword@123
+ *     responses:
+ *       200:
+ *         description: Password reset successfully
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Password reset successfully
+ *       400:
+ *         description: Invalid or expired token
+ */
+router.post("/reset-password", AuthController.resetPassword);
+
 export default router;

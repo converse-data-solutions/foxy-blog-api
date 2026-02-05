@@ -1,22 +1,14 @@
 import { Request, Response } from "express";
+import { HttpError } from "../../../common/utils/httpError";
+import { AuthRequest } from "../../../types/auth-request";
+import { PostStatus } from "../post-status.enum";
 import { PostService } from "./post.service";
-import { AuthRequest } from "../../types/auth-request";
-import { PostStatus } from "./post-status.enum";
-import { HttpError } from "../../common/utils/httpError";
 
 export const PostController = {
   async create(req: Request, res: Response) {
     const authReq = req as AuthRequest;
-
-    if (!authReq.user) {
-      throw new HttpError("Unauthorized", 401);
-    }
-
-    const post = await PostService.create({
-      ...req.body,
-      authorId: authReq.user._id,
-    });
-
+    const post = await PostService.create(authReq.user._id, req.body);
+    
     return res.status(201).json({
       success: true,
       statusCode: 201,
@@ -46,10 +38,6 @@ export const PostController = {
 
   async getMyPosts(req: Request, res: Response) {
     const authReq = req as AuthRequest;
-
-    if (!authReq.user) {
-      throw new HttpError("Unauthorized", 401);
-    }
 
     const status =
       req.query.status === PostStatus.DRAFT
@@ -99,22 +87,6 @@ export const PostController = {
       statusCode: 200,
       message: "Post updated",
       data: post,
-    });
-  },
-
-  async delete(req: Request, res: Response) {
-    const authReq = req as AuthRequest;
-
-    if (!authReq.user) {
-      throw new HttpError("Unauthorized", 401);
-    }
-
-    await PostService.remove(req.params.id as string, authReq.user);
-
-    return res.status(200).json({
-      success: true,
-      statusCode: 200,
-      message: "Post deleted",
     });
   },
 };

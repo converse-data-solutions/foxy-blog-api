@@ -1,21 +1,24 @@
 import slugify from "slugify";
 import { PostRepository } from "./post.repository";
-import { HttpError } from "../../common/utils/httpError";
-import { CreatePostDTO, PostStatus } from "./post.dto";
+import { HttpError } from "../../../common/utils/httpError";
+import { CreatePostDTO, PostStatus } from "../post.dto";
+import { UserRepository } from "../../users/user.repository";
 
 export class PostService {
-  static async create(data: CreatePostDTO) {
+  static async create(userId: string, data: CreatePostDTO) {
     const slug = slugify(data.title, { lower: true });
 
     const existingPost = await PostRepository.findBySlugWithRelated(slug);
     if (existingPost) {
       throw new HttpError("Post already exists", 409);
     }
-
+    const checkuser = await UserRepository.findByIdWise(userId);
+     if (checkuser!.isBlocked || !checkuser!.isVerified) {
+    throw new HttpError("User is blocked or not verified", 401);
+  }   
+    const senddata={...data,  authorId: userId,slug}
     const post = await PostRepository.create({
-      ...data,
-      slug,
-      publishedAt: data.status === "published" ? new Date() : null,
+      ...senddata
     });
     return post;
   }
@@ -71,7 +74,11 @@ export class PostService {
     return post;
   }
 
-  static async update(id: string, authorId: string, data: Partial<CreatePostDTO>) {
+  static async update(
+    id: string,
+    authorId: string,
+    data: Partial<CreatePostDTO>,
+  ) {
     const post = await PostRepository.findById(id);
     if (!post) {
       throw new HttpError("Post not found", 404);
@@ -91,18 +98,4 @@ export class PostService {
 
     return PostRepository.updateById(id, data);
   }
-
-  static async remove(id: string, user: any) {
-    const post = await PostRepository.findById(id);
-    if (!post) {
-      throw new HttpError("Post not found", 404);
-    }
-
-    if (post.authorId.toString() !== user.userId && user.role !== "admin") {
-      throw new HttpError("Forbidden", 403);
-    }
-
-    await PostRepository.deleteById(id);
-    return;
-  }
-};
+}

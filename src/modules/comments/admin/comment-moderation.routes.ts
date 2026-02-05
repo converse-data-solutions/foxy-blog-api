@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { requireAuth } from "../../common/middlewares/auth.middleware";
-import { allowRoles } from "../../common/middlewares/role.middleware";
-import { CommentModerationController } from "./comment-moderation.controller";
+import { requireAuth } from "../../../common/middlewares/auth.middleware";
+import { allowRoles } from "../../../common/middlewares/role.middleware";
+import { CommentModerationController } from "./comment-admin.controller";
 
 const router = Router();
 
@@ -39,7 +39,7 @@ router.put(
   "/:commentId/hide",
   requireAuth,
   allowRoles("admin"),
-  CommentModerationController.hideComment
+  CommentModerationController.hideComment,
 );
 
 /**
@@ -69,7 +69,7 @@ router.put(
   "/:commentId/show",
   requireAuth,
   allowRoles("admin"),
-  CommentModerationController.showComment
+  CommentModerationController.showComment,
 );
 
 export default router;

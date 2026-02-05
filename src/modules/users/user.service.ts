@@ -1,30 +1,18 @@
-import { Types } from "mongoose";
-import { Profile } from "./profile.model";
-import { User } from "./user.model";
 import { UserRepository } from "./user.repository";
+import { compare, hash } from "../../common/utils/hash";
 
 export class UserService {
   static async findById(id: string) {
-    return await User.findById(id).select("-passwordHash");
+    return await UserRepository.findByIdWise(id);
   }
 
-  static async findAll() {
-    return await User.find().select("-passwordHash");
-  }
-
-  static async delete(id: string) {
-    return await User.findByIdAndDelete(id);
-  }
+ 
   static async getByUserId(userId: string) {
-    return await Profile.findOne({ userId });
+    return await UserRepository.getProfile(userId);
   }
 
-  static async upsert(userId: string, data: any) {
-    return await Profile.findOneAndUpdate(
-      { userId: new Types.ObjectId(userId) },
-      { ...data, updatedAt: new Date() },
-      { new: true, upsert: true },
-    );
+  static async upsert(userId: string, data: Partial<{ bio: string; avatarUrl: string }>) {
+    return await UserRepository.updateProfile(userId, data);
   }
 
   static async getMyReactions(userId: string) {
@@ -33,5 +21,22 @@ export class UserService {
 
   static async getMyShares(userId: string) {
     return await UserRepository.findByUserShares(userId);
+  }
+
+  static async updatePassword(
+    userId: string,
+    oldPassword: string,
+    newPassword: string,
+  ) {
+    const user = await UserRepository.verifyUser(userId);
+    if (!user) throw new Error("User not found");
+
+    const isMatch = await compare(oldPassword, user.passwordHash!);
+    if (!isMatch) throw new Error("Old password is incorrect");
+
+    const hashed = await hash(newPassword);
+
+    await UserRepository.updatePassword(userId, hashed);
+    return true;
   }
 }

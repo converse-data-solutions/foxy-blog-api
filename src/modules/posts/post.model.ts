@@ -60,7 +60,10 @@ const PostSchema = new Schema(
       enum: ["draft", "published"],
       default: "draft",
     },
-
+    isDeleted: {
+      type: Boolean,
+      default: false,
+    },
     seoKeywords: [String],
 
     publishedAt: Date,

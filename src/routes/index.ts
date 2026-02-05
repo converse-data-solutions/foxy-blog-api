@@ -8,10 +8,10 @@ import postViewRoutes from "../modules/post-view";
 import shareRoutes from "../modules/shares";
 import { adminUserRoutes, userRoutes } from "../modules/users";
 import notificationRoutes from "../modules/notifications";
-import postRoutes from "../modules/posts";
 import uploadRoutes from "../modules/uploads";
 import categoryRoutes from "../modules/categories";
 import tagRoutes from "../modules/tags";
+import { adminPostRoutes, postRoutes } from "../modules/posts";
 
 import {
   authLimiter,
@@ -51,5 +51,6 @@ router.use("/admin/tags", adminLimiter, tagRoutes);
 router.use("/admin/users", adminLimiter, adminUserRoutes);
 router.use("/admin/comments", adminLimiter, adminCommentRoutes);
 router.use("/admin/dashboard", adminLimiter, adminDashboardRoutes);
+router.use("/admin/posts", adminLimiter, adminPostRoutes);
 
 export default router;

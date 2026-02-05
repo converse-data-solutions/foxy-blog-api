@@ -1,6 +1,7 @@
-import { CreatePostDTO, UpdatePostDTO } from "./post.dto";
-import { Post } from "./post.model";
+
 import { PipelineStage } from "mongoose";
+import { CreatePostDTO, UpdatePostDTO } from "../post.dto";
+import { Post } from "../post.model";
 
 export class PostRepository {
   static async create(data: CreatePostDTO) {

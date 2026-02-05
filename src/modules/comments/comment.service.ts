@@ -23,9 +23,6 @@ export class CommentService {
     return await CommentRepository.findByPost(postId);
   }
 
-  static async updateStatus(commentId: string, status: "visible" | "hidden" | "deleted") {
-    return await CommentRepository.updateStatus(commentId, status);
-  }
 
   static async delete(commentId: string) {
     // soft delete

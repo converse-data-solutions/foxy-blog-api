@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { UserService } from "./user.service";
 import { AuthRequest } from "../../types/auth-request";
 
-
 export const UserController = {
   async getMe(req: Request, res: Response) {
     const authReq = req as AuthRequest;
@@ -23,8 +22,7 @@ export const UserController = {
     res.json(profile);
   },
 
-
- async getMyReactions(req: Request, res: Response) {
+  async getMyReactions(req: Request, res: Response) {
     const authReq = req as AuthRequest;
 
     const reactions = await UserService.getMyReactions(authReq.user._id);
@@ -38,5 +36,18 @@ export const UserController = {
 
     res.json({ data: shares });
   },
-}
 
+    async updatePassword(req: Request, res: Response) {
+        const authReq = req as AuthRequest;
+        const { oldPassword, newPassword } = req.body;
+  
+        await UserService.updatePassword(
+          authReq.user!._id,
+          oldPassword,
+          newPassword
+        );
+  
+        res.json({ message: "Password updated successfully" });
+      } ,
+  
+};

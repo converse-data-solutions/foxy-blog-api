@@ -18,6 +18,8 @@ const router = Router();
  *   post:
  *     summary: Create a new tag
  *     tags: [Tags]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -38,7 +40,7 @@ const router = Router();
  *       201:
  *         description: Tag created successfully
  */
-router.post("/", requireAuth, allowRoles("admin"),TagController.create);
+router.post("/", requireAuth, allowRoles("admin"), TagController.create);
 
 /**
  * @swagger
@@ -58,6 +60,8 @@ router.get("/", TagController.getAll);
  *   put:
  *     summary: Update a tag
  *     tags: [Tags]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -74,7 +78,7 @@ router.get("/", TagController.getAll);
  *       200:
  *         description: Tag updated successfully
  */
-router.put("/:id",requireAuth, allowRoles("admin"), TagController.update);
+router.put("/:id", requireAuth, allowRoles("admin"), TagController.update);
 
 /**
  * @swagger
@@ -82,6 +86,8 @@ router.put("/:id",requireAuth, allowRoles("admin"), TagController.update);
  *   delete:
  *     summary: Delete a tag
  *     tags: [Tags]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -92,6 +98,6 @@ router.put("/:id",requireAuth, allowRoles("admin"), TagController.update);
  *       200:
  *         description: Tag deleted successfully
  */
-router.delete("/:id",requireAuth, allowRoles("admin"), TagController.delete);
+router.delete("/:id", requireAuth, allowRoles("admin"), TagController.delete);
 
 export default router;

@@ -1,14 +1,14 @@
 import { Router } from "express";
 import { PostController } from "./post.controller";
-import { requireAuth } from "../../common/middlewares/auth.middleware";
-import { allowRoles } from "../../common/middlewares/role.middleware";
+import { requireAuth } from "../../../common/middlewares/auth.middleware";
+import { allowRoles } from "../../../common/middlewares/role.middleware";
 import {
   createPostSchema,
   postIdParamSchema,
   postSlugParamSchema,
   updatePostSchema,
-} from "./post.validation";
-import { validate } from "../../common/middlewares/validate";
+} from "../post.validation";
+import { validate } from "../../../common/middlewares/validate";
 
 const router = Router();
 
@@ -150,7 +150,7 @@ router.get("/", PostController.getAll);
  *       401:
  *         description: Unauthorized
  */
-router.get("/me", requireAuth,PostController.getMyPosts);
+router.get("/me", requireAuth, PostController.getMyPosts);
 
 /**
  * @swagger
@@ -235,32 +235,5 @@ router.put(
   PostController.update,
 );
 
-/**
- * @swagger
- * /api/posts/{id}:
- *   delete:
- *     summary: Delete a post (admin only)
- *     tags: [Posts]
- *     security:
- *       - bearerAuth: []
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: Post deleted
- *       403:
- *         description: Forbidden
- */
-router.delete(
-  "/:id",
-  validate(postIdParamSchema),
-  requireAuth,
-  allowRoles("user", "admin"),
-  PostController.delete,
-);
 
 export default router;

@@ -4,6 +4,7 @@ import { Category } from "../../modules/categories/category.model";
 import { Tag } from "../../modules/tags/tag.model";
 import { User } from "../../modules/users/user.model";
 import bcrypt from "bcryptjs";
+import { logger } from "../../config/winston.logger";
 
 export async function seedCategories() {
   const filePath = path.resolve(
@@ -24,11 +25,11 @@ export async function seedCategories() {
         description: cat.description,
       });
     } else {
-      console.log(`⚠️ Category exists: ${cat.name}`);
+      logger.info(`Category exists: ${cat.name}`);
     }
   }
 
-  console.log("✅ Category seeding completed");
+  logger.info("Category seeding completed");
 }
 
 export async function seedTags() {
@@ -49,11 +50,11 @@ export async function seedTags() {
         slug: tag.slug,
       });
     } else {
-      console.log(`⚠️ Tag exists: ${tag.name}`);
+      logger.info(`Tag exists: ${tag.name}`);
     }
   }
 
-  console.log("✅ Tag seeding completed");
+  logger.info("Tag seeding completed");
 }
 
 export async function seedAdmin() {
@@ -72,7 +73,7 @@ export async function seedAdmin() {
       isVerified: true,
     });
   } else {
-    console.log("✅ Admin already exists");
+    logger.info("Admin already exists");
   }
-  console.log("🚀 Admin user created successfully");
+  logger.info("Admin user created successfully");
 }

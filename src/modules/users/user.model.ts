@@ -8,6 +8,7 @@ export interface IUser {
   authProvider: "local" | "google" | "github" | "linkedin";
   role: "user" | "admin";
   isVerified: boolean;
+  isBlocked?: boolean;
   createdAt: Date;
 }
 
@@ -18,6 +19,7 @@ const userSchema = new Schema<IUser>({
   authProvider: { type: String, default: "local" },
   role: { type: String, default: "user" },
   isVerified: { type: Boolean, default: false },
+  isBlocked: { type: Boolean, default: false },
   createdAt: { type: Date, default: Date.now },
 });
 

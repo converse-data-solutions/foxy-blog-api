@@ -122,4 +122,44 @@ router.get("/me/reactions", requireAuth, UserController.getMyReactions);
  */
 router.get("/me/shares", requireAuth, UserController.getMyShares);
 
+
+/**
+ * @swagger
+ * /api/users/me/password:
+ *   post:
+ *     summary: Update password (logged-in user)
+ *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - oldPassword
+ *               - newPassword
+ *             properties:
+ *               oldPassword:
+ *                 type: string
+ *                 example: OldPassword@123
+ *               newPassword:
+ *                 type: string
+ *                 example: NewStrongPassword@123
+ *     responses:
+ *       200:
+ *         description: Password updated successfully
+ *         content:
+ *           application/json:
+ *             example:
+ *               message: Password updated successfully
+ *       401:
+ *         description: Unauthorized
+ */
+router.post(
+  "/me/password",
+  requireAuth,
+  UserController.updatePassword
+);
 export default router;
