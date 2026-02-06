@@ -94,7 +94,7 @@ router.get("/verify/:token", AuthController.verifyEmail);
 
 /**
  * @swagger
- * /auth/google:
+ * /api/auth/google:
  *   get:
  *     summary: Login with Google
  *     description: Redirects the user to Google OAuth consent screen.
@@ -110,7 +110,7 @@ router.get(
 
 /**
  * @swagger
- * /auth/google/callback:
+ * /api/auth/google/callback:
  *   get:
  *     summary: Google OAuth callback
  *     description: Google redirects back to this endpoint after authentication.
@@ -125,7 +125,7 @@ router.get(
   "/google/callback",
   passport.authenticate("google", { session: false }),
   (req, res) => {
-    res.redirect("/dashboard");
+    res.redirect(`${process.env.FRONTEND_URL}/dashboard`);
   },
 );
 

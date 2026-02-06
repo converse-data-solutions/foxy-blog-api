@@ -60,7 +60,7 @@ export class UserRepository {
   }
 
   static async updatePassword(userId: string, hashedPassword: string) {
-    const test = await User.findByIdAndUpdate(userId, {
+    return await User.findByIdAndUpdate(userId, {
       passwordHash: hashedPassword,
     });
   }
